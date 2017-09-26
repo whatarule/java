@@ -30,5 +30,6 @@ public class Hand {
   public boolean isPaper() {
     return this instanceof Paper;
   }
+
 }
 

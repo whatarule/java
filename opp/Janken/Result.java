@@ -20,5 +20,11 @@ public class Result {
       return "Draw";
     }
   }
+  public static class NoGame extends Result {
+    public NoGame() {}
+    public String toString () {
+      return "NoGame";
+    }
+  }
 }
 
