@@ -23,10 +23,10 @@ public class Janken {
       .collect(Collectors.toList());
 
   public static void main (String [] args ) {
-    Janken janken = new Janken();
-    int numMatch = 3;
-    Player player = new Player("player");
-    Player opponent = new Player("opponent");
+    final Janken janken = new Janken();
+    final int numMatch = 3;
+    final Player player = new Player("player");
+    final Player opponent = new Player("opponent");
 
     new Judgement(numMatch
       , opponent.showHands(janken.listRandomDouble.apply(numMatch))

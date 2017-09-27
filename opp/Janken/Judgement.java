@@ -12,9 +12,9 @@ import java.util.stream.IntStream;
 import java.util.stream.Collectors;
 
 public class Judgement {
-  private int _numMatch;
-  private List<Hand> _listOpponentHand;
-  private List<Hand> _listPlayerHand;
+  private final int _numMatch;
+  private final List<Hand> _listOpponentHand;
+  private final List<Hand> _listPlayerHand;
   public Judgement (
     int numMatch, List<Hand> listOpponentHand, List<Hand> listPlayerHand) {
     this._numMatch = numMatch;
@@ -37,35 +37,25 @@ public class Judgement {
   }
   private Stream<Pair<Hand, Hand>> listPairHand() {
     return IntStream.range(0, this._numMatch)
-      .mapToObj(i -> new Pair<Hand,Hand>(this._listOpponentHand.get(i), this._listPlayerHand.get(i)))
+      .mapToObj(i -> new Pair<Hand,Hand>(
+          this._listOpponentHand.get(i)
+        , this._listPlayerHand.get(i)
+        ))
       //.collect(Collectors.toList())
       ;
   }
 
-  private Result _judge(
-    Hand opponentHand, Hand playerHand) {
-    if (playerHand.toString() == opponentHand.toString()) {
-      return new Draw();
-    } else if (playerHand.isStone() && opponentHand.isScissors()) {
-      return new Win();
-    } else if (playerHand.isScissors() && opponentHand.isPaper()) {
-      return new Win();
-    } else if (playerHand.isPaper() && opponentHand.isStone()) {
-      return new Win();
-    } else {
-      return new Lose();
-    }
-  }
   public List<Result> judge() {
-    int numMatchOpponent = this._listOpponentHand.size();
-    int numMatchPlayer = this._listPlayerHand.size();
+    final int numMatchOpponent = this._listOpponentHand.size();
+    final int numMatchPlayer = this._listPlayerHand.size();
     if (numMatchOpponent == numMatchPlayer) {
       return this.listPairHand()
-        .map(pair -> this._judge(pair._opponentHand, pair._playerHand))
+        .map(pair -> pair._playerHand.matchTo(pair._opponentHand))
         .collect(Collectors.toList());
     } else {
       return Arrays.asList(new NoGame());
     }
   }
+
 }
 
