@@ -1,0 +1,11 @@
+task hello << {
+  println "hello"
+}
+
+task runCompile << {
+  println "run compile"
+}
+task executeTest (dependsOn: runCompile) << {
+  println "execute test"
+}
+
