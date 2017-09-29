@@ -5,7 +5,7 @@ import janken.hand.*;
 import janken.result.*;
 
 public abstract class Hand {
-  public String toString() {
+  public final String toString() {
     return this.getClass().getSimpleName();
   }
 
@@ -13,17 +13,17 @@ public abstract class Hand {
   public boolean isStone() {
     return this instanceof Stone;
   }
-  public boolean isScissors() {
+  public final boolean isScissors() {
     return this instanceof Scissors;
   }
-  public boolean isPaper() {
+  public final boolean isPaper() {
     return this instanceof Paper;
   }
-  private boolean equals(Hand opponentHand) {
+  private final boolean equals(Hand opponentHand) {
     return opponentHand.getClass() == this.getClass();
   }
 
-  public Result matchTo(Hand opponentHand) {
+  public final Result matchTo(Hand opponentHand) {
     if (this.winTo(opponentHand)) {
       return new Win();
     } else if (this.equals(opponentHand)) {
